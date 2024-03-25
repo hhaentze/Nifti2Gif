@@ -1,0 +1,6 @@
+argparse==1.4.0
+nibabel
+scipy
+imageio
+matplotlib
+tqdm

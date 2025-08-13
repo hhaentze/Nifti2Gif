@@ -4,7 +4,11 @@
 Transform nifti images to gifs. If you have segmentation masks, you can add them as a second positional argument.
 
 ## Installation
-Either use pip `pip install nifti2gif` or clone this repository.
+```bash
+git clone https://github.com/hhaentze/Nifti2Gif.git
+cd nifti2gif
+pip install -e .
+```
 
 ## Execute
 `nifti2gif  <image.nii.gz> --mask <mask.nii.gz>`

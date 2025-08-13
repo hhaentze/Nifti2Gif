@@ -82,33 +82,33 @@ def stack_slices(
                 vmax=y.max(),
             )
 
-        # highlight edges
-        if highlight_edges:
+            # highlight edges
+            if highlight_edges :
 
-            # calculate edges with laplace filter
-            edge_slice = np.zeros(y[:, :, i].shape)
-            for _class in np.unique(y[:, :, i]):
-                _slice = y[:, :, i].copy()
-                _slice[_slice != _class] = 0
-                edges = ndimage.laplace(_slice)
-                edge_slice[edges != 0] = _class
+                # calculate edges with laplace filter
+                edge_slice = np.zeros(y[:, :, i].shape)
+                for _class in np.unique(y[:, :, i]):
+                    _slice = y[:, :, i].copy()
+                    _slice[_slice != _class] = 0
+                    edges = ndimage.laplace(_slice)
+                    edge_slice[edges != 0] = _class
 
-            alpha_map = np.zeros(edge_slice.shape)
-            alpha_map[edge_slice > 0] = 0.9
+                alpha_map = np.zeros(edge_slice.shape)
+                alpha_map[edge_slice > 0] = 0.9
 
-            # create darker colormap
-            edge_cmap = mpl.cm.jet(np.linspace(0, 1, int(y.max())))
-            edge_cmap -= 0.4
-            edge_cmap = edge_cmap.clip(0, 1)
-            edge_cmap = mpl.colors.ListedColormap(edge_cmap)
+                # create darker colormap
+                edge_cmap = mpl.cm.jet(np.linspace(0, 1, int(y.max())))
+                edge_cmap -= 0.4
+                edge_cmap = edge_cmap.clip(0, 1)
+                edge_cmap = mpl.colors.ListedColormap(edge_cmap)
 
-            ax.imshow(
-                edge_slice,
-                alpha=alpha_map,
-                cmap=edge_cmap,
-                vmin=y.min(),
-                vmax=y.max(),
-            )
+                ax.imshow(
+                    edge_slice,
+                    alpha=alpha_map,
+                    cmap=edge_cmap,
+                    vmin=y.min(),
+                    vmax=y.max(),
+                )
 
         plt.axis("off")
         im_list += [fig2numpy(fig)]
@@ -129,6 +129,8 @@ def save_as_gif(
         duration=duration,  # duration in ms for each frame
         loop=0,  # loop gif indefinitely
     )
+    print(f"Saved gif to {filename}")
+
 
 
 def readImage(filepath: str, orientation: str, n_turn90: int) -> np.ndarray:
